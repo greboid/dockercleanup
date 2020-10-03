@@ -1,17 +1,5 @@
 FROM golang:latest as builder
 
-ENV USER=appuser
-ENV UID=10001
-
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    "${USER}"
-
 WORKDIR /app
 COPY . /app
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -trimpath -ldflags=-buildid= -o main ./
@@ -24,5 +12,4 @@ COPY --from=builder /etc/group /etc/group
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 
 COPY --from=builder /app/main /dockercleanup
-USER appuser:appuser
 CMD ["/dockercleanup"]
