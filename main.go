@@ -68,9 +68,7 @@ func cleanContainers(cli *client.Client) error {
 		return err
 	}
 	if len(containerReport.ContainersDeleted) > 0 {
-		log.Printf("Removed %s",
-			humanReadableSize(containerReport.SpaceReclaimed),
-		)
+		log.Printf("Removed %s", humanReadableSize(containerReport.SpaceReclaimed))
 	}
 	return nil
 }
@@ -90,9 +88,7 @@ func cleanImages(cli *client.Client) error {
 		return err
 	}
 	if len(imageReport.ImagesDeleted) > 0 {
-		log.Printf("Removed %s",
-			humanReadableSize(imageReport.SpaceReclaimed),
-		)
+		log.Printf("Removed %s", humanReadableSize(imageReport.SpaceReclaimed))
 	}
 	return nil
 }
