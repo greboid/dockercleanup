@@ -10,12 +10,13 @@ Available as a docker image, will access either CLI arguments or environmental v
 version: '3.7'
 
 services:
-  dockermirror:
+  dockercleanup:
     image: greboid/dockercleanup
     environment:
       DURATION: 24h
+    privileged: true
     volumes:
-      - <local path to config.yml>:/config.yml
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 ```
 
