@@ -1,15 +1,15 @@
 updates:
-- package-ecosystem: "github-actions"
-  directory: "/"
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "daily"
-- package-ecosystem: "docker"
-  directory: "/"
-  registries:
-    - dockerhub
-  schedule:
+  - package-ecosystem: "docker"
+    directory: "/"
+    registries:
+      - dockerhub
+    schedule:
     interval: "daily"
-- package-ecosystem: gomod
+  - package-ecosystem: gomod
     directory: "/"
     schedule:
       interval: "daily"
