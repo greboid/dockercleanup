@@ -1,15 +1,16 @@
+version: 2
 updates:
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "dependencies"
   - package-ecosystem: "docker"
     directory: "/"
     registries:
       - dockerhub
     schedule:
-    interval: "daily"
-  - package-ecosystem: gomod
-    directory: "/"
-    schedule:
       interval: "daily"
+    labels:
+      - "dependencies"
