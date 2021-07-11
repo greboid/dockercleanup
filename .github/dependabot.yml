@@ -8,8 +8,6 @@ updates:
       - "dependencies"
   - package-ecosystem: "docker"
     directory: "/"
-    registries:
-      - dockerhub
     schedule:
       interval: "daily"
     labels:
