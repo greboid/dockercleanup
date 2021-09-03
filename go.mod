@@ -1,6 +1,6 @@
 module github.com/greboid/dockercleanup
 
-go 1.16
+go 1.17
 
 require (
 	github.com/Microsoft/go-winio v0.4.14 // indirect
@@ -13,3 +13,5 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/net v0.0.0-20201002202402-0a1ea396d57c // indirect
 )
+
+require golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
