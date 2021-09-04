@@ -1,4 +1,4 @@
-FROM golang:latest as builder
+FROM registry.greboid.com/mirror/golang:latest as builder
 
 WORKDIR /app
 COPY . /app
