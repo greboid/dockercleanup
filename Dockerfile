@@ -1,4 +1,4 @@
-FROM ghcr.io/greboid/dockerfiles/golang@sha256::b39e962ca9b7c2d31ba231c4912fc7831d59dfbb5dcd5e3fa9bba79bd51cc32c as builder
+FROM ghcr.io/greboid/dockerfiles/golang@sha256:b39e962ca9b7c2d31ba231c4912fc7831d59dfbb5dcd5e3fa9bba79bd51cc32c as builder
 
 WORKDIR /app
 COPY . /app
