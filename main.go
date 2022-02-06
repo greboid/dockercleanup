@@ -7,9 +7,9 @@ import (
 	"log"
 	"time"
 
+	"github.com/csmith/envflag"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
-	"github.com/kouhin/envflag"
 )
 
 var (
@@ -19,11 +19,8 @@ var (
 )
 
 func main() {
-	err := envflag.Parse()
-	if err != nil {
-		log.Fatalf("unable to parse config location: %s", err.Error())
-	}
-	cli, err := client.NewEnvClient()
+	envflag.Parse()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		log.Fatalf("unable to create docker client: %s", err.Error())
 	}
