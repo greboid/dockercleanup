@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/csmith/envflag v1.0.0
-	github.com/docker/docker v20.10.17+incompatible
+	github.com/docker/docker v20.10.18+incompatible
 )
 
 require (
