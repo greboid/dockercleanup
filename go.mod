@@ -1,6 +1,6 @@
 module github.com/greboid/dockercleanup
 
-go 1.17
+go 1.20
 
 require (
 	github.com/csmith/envflag v1.0.0
