@@ -3,7 +3,7 @@ module github.com/greboid/dockercleanup
 go 1.25.0
 
 require (
-	github.com/csmith/envflag v1.0.0
+	github.com/csmith/envflag/v2 v2.0.0
 	github.com/docker/docker v28.5.2+incompatible
 )
 
