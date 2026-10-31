@@ -4,10 +4,12 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"
+	"log/slog"
+	"os"
 	"time"
 
 	"github.com/csmith/envflag/v2"
+	"github.com/csmith/slogflags"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 )
@@ -20,9 +22,12 @@ var (
 
 func main() {
 	envflag.Parse()
+	slogflags.Logger(slogflags.WithSetDefault(true))
+	slog.Info("Starting", "duration", duration.String(), "allimages", *removeUnusedImages, "containers", *removeContainer)
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		log.Fatalf("unable to create docker client: %s", err.Error())
+		slog.Error("unable to create docker client", "error", err)
+		os.Exit(1)
 	}
 	if *duration < time.Minute {
 		cleanAndOutput(cli)
@@ -37,7 +42,8 @@ func main() {
 func cleanAndOutput(cli *client.Client) {
 	err := cleanAll(cli)
 	if err != nil {
-		log.Fatalf("unable to clean perform cleanup: %s", err.Error())
+		slog.Error("unable to perform cleanup", "error", err)
+		os.Exit(1)
 	}
 }
 
@@ -65,7 +71,7 @@ func cleanContainers(cli *client.Client) error {
 		return err
 	}
 	if len(containerReport.ContainersDeleted) > 0 {
-		log.Printf("Removed %s", humanReadableSize(containerReport.SpaceReclaimed))
+		slog.Info("Removed containers", "space_reclaimed", humanReadableSize(containerReport.SpaceReclaimed))
 	}
 	return nil
 }
@@ -85,7 +91,7 @@ func cleanImages(cli *client.Client) error {
 		return err
 	}
 	if len(imageReport.ImagesDeleted) > 0 {
-		log.Printf("Removed %s", humanReadableSize(imageReport.SpaceReclaimed))
+		slog.Info("Removed images", "space_reclaimed", humanReadableSize(imageReport.SpaceReclaimed))
 	}
 	return nil
 }
